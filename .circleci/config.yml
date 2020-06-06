@@ -54,10 +54,9 @@ workflows:
       jobs:
         - build-and-test-client
         - build-and-test-server
-
         - docker-publish-client:
             requires:
-              build-and-test-client
+              - build-and-test-client
         - docker-publish-api:
             requires:
-              build-and-test-server
+              - build-and-test-server
