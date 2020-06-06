@@ -31,9 +31,9 @@ jobs:
             npm test
           name: "npm install & test"
 
-  docker-build-client:
+  docker-publish-client:
     docker:
-      image: circleci/buildpack-deps:stretch
+      - image: circleci/buildpack-deps:stretch
     steps:
       - docker/check
       - docker/publish:
@@ -42,7 +42,7 @@ jobs:
 
   docker-publish-api:
     docker:
-      image: circleci/buildpack-deps:stretch
+      - image: circleci/buildpack-deps:stretch
     steps:
       - docker/check
       - docker/publish:
