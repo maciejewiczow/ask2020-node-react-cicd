@@ -24,12 +24,12 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-        app-dir: './server'
+          app-dir: './server'
       - run:
           command: |
             cd ./server
             npm test
-          name: "npm install & test"
+          name: "npm test"
 
   docker-publish-client:
     docker:
