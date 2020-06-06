@@ -37,8 +37,8 @@ jobs:
     steps:
       - docker/check
       - docker/publish:
-        docker-context: ./client
-        image: "Client:latest"
+          docker-context: ./client
+          image: "Client:latest"
 
   docker-publish-api:
     docker:
@@ -46,8 +46,8 @@ jobs:
     steps:
       - docker/check
       - docker/publish:
-        docker-context: ./server
-        image: "API:latest"
+          docker-context: ./server
+          image: "API:latest"
 
 workflows:
     build-and-test:
@@ -56,8 +56,8 @@ workflows:
         - build-and-test-server
 
         - docker-publish-client:
-          requires:
-            build-and-test-client
+            requires:
+              build-and-test-client
         - docker-publish-api:
-          requires:
-            build-and-test-server
+            requires:
+              build-and-test-server
