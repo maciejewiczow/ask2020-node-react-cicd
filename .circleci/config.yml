@@ -38,6 +38,7 @@ workflows:
         - build-and-test-server
         - docker/publish:
             path: ./client
+            dockerfile: ./client/Dockerfile
             image: $DOCKER_LOGIN/client
             tag: latest
             requires:
@@ -45,6 +46,7 @@ workflows:
 
         - docker/publish:
             path: ./server
+            dockerfile: ./server/Dockerfile
             image: $DOCKER_LOGIN/api
             tag: latest
             requires:
