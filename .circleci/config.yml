@@ -31,36 +31,18 @@ jobs:
             npm test
           name: "npm test"
 
-  docker-publish-client:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - docker/check
-      - docker/publish:
-          docker-context: ./client
-          image: "DOCKER_USERNAME/Client:latest"
-
-  docker-publish-api:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - docker/check
-      - docker/publish:
-          docker-context: ./server
-          image: "$DOCKER_USERNAME/API:latest"
-
 workflows:
-    build-and-test:
+    build-test-publish:
       jobs:
         - build-and-test-client
         - build-and-test-server
         - docker/publish:
             docker-context: ./client
-            image: "DOCKER_USERNAME/Client:latest"
+            image: "$DOCKER_USERNAME/Client:latest"
             requires:
               - build-and-test-client
         - docker/publish:
             docker-context: ./client
-            image: "DOCKER_USERNAME/Client:latest"
+            image: "$DOCKER_USERNAME/Client:latest"
             requires:
               - build-and-test-server
