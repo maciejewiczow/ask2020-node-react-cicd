@@ -7,6 +7,9 @@ services:
       context: ./server
     env_file:
     - ./server/.env
+    environment:
+      DB_HOST: "node-react-db"
+
   react-client:
     container_name: cra-client
     image: react-client:1.0
@@ -14,8 +17,11 @@ services:
       context: ./client
     ports:
     - "8080:80"
+
   node-db:
     container_name: node-react-db
     image: node-react-db:1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "Zaq12wsx"
     build:
       context: ./db

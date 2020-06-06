@@ -43,6 +43,10 @@ workflows:
             tag: latest
             requires:
               - build-and-test-client
+            filters:
+              branches:
+                only:
+                  - master
 
         - docker/publish:
             path: ./server
@@ -51,3 +55,7 @@ workflows:
             tag: latest
             requires:
               - build-and-test-server
+            filters:
+              branches:
+                only:
+                  - master
