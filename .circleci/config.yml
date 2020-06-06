@@ -38,11 +38,13 @@ workflows:
         - build-and-test-server
         - docker/publish:
             docker-context: ./client
-            image: "$DOCKER_USERNAME/Client:latest"
+            image: $DOCKER_LOGIN/client
+            tag: latest
             requires:
               - build-and-test-client
         - docker/publish:
-            docker-context: ./client
-            image: "$DOCKER_USERNAME/Client:latest"
+            docker-context: ./server
+            image: $DOCKER_LOGIN/api
+            tag: latest
             requires:
               - build-and-test-server
