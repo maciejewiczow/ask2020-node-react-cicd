@@ -38,7 +38,7 @@ jobs:
       - docker/check
       - docker/publish:
           docker-context: ./client
-          image: "Client:latest"
+          image: "DOCKER_USERNAME/Client:latest"
 
   docker-publish-api:
     docker:
@@ -47,16 +47,20 @@ jobs:
       - docker/check
       - docker/publish:
           docker-context: ./server
-          image: "API:latest"
+          image: "$DOCKER_USERNAME/API:latest"
 
 workflows:
     build-and-test:
       jobs:
         - build-and-test-client
         - build-and-test-server
-        - docker-publish-client:
+        - docker/publish:
+            docker-context: ./client
+            image: "DOCKER_USERNAME/Client:latest"
             requires:
               - build-and-test-client
-        - docker-publish-api:
+        - docker/publish:
+            docker-context: ./client
+            image: "DOCKER_USERNAME/Client:latest"
             requires:
               - build-and-test-server
